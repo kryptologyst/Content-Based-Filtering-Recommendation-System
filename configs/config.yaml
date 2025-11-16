@@ -1,0 +1,42 @@
+# Configuration file for content-based filtering experiment
+
+# Data settings
+data:
+  data_dir: "data"
+  items_file: "items.csv"
+  interactions_file: "interactions.csv"
+  users_file: "users.csv"
+  min_user_interactions: 3
+  test_size: 0.2
+  val_size: 0.1
+  random_state: 42
+
+# Model settings
+models:
+  tfidf:
+    vectorizer_type: "tfidf"
+    max_features: 1000
+    ngram_range: [1, 2]
+    stop_words: "english"
+  
+  sbert:
+    vectorizer_type: "sbert"
+    model_name: "all-MiniLM-L6-v2"
+    device: "cpu"
+
+# Evaluation settings
+evaluation:
+  k_values: [5, 10, 20]
+  metrics: ["precision", "recall", "ndcg", "hit_rate", "map", "coverage"]
+  split_method: "temporal"  # "temporal" or "random"
+
+# Demo settings
+demo:
+  streamlit_port: 8501
+  max_recommendations: 20
+  show_explanations: true
+
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
